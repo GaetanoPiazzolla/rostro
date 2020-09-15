@@ -1,0 +1,95 @@
+<div class="well">
+
+  <div class="row">
+
+    <div class="col-4 pull-left">
+      <h5>
+        <b>Top (
+          <a [ngClass]="{'link' : number !== 5}" (click)="clickNumber(5)">5</a>,
+          <a [ngClass]="{'link' : number !== 10}" (click)="clickNumber(10)">10</a>,
+          <a [ngClass]="{'link' : number !== 20}" (click)="clickNumber(20)">20</a>,
+          <a [ngClass]="{'link' : number !== 100}" (click)="clickNumber(100)">100</a> )
+          processes of
+          <a *ngIf="!loading" [ngClass]="{'link' : number !== processes.all}"
+             (click)="clickNumber(processes.all)">{{processes.all}}</a>
+          <span *ngIf="!loading"> - {{processes.filtered}} shown</span>
+        </b>
+      </h5>
+    </div>
+    <div class="col-5"></div>
+    <div class="col-3 pull-right">
+      <input type="text" class="form-control"
+             [(ngModel)]="inputValue"
+             (ngModelChange)="onSearchInputChange($event)"
+             placeholder="Search by process name"
+      />
+    </div>
+
+  </div>
+  <hr>
+  <div *ngIf="loading" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!loading">
+
+    <table id="processTable" class="table table-hover">
+
+      <thead>
+      <tr>
+        <th class="th-sm">User</th>
+        <th class="th-sm">Pid</th>
+        <th class="th-sm">Name</th>
+        <th class="th-sm">Command</th>
+        <th class="th-sm">Started</th>
+        <th class="th-sm">State</th>
+        <th class="th-sm" class="link" (click)="clickCpu()">
+          %CPU <span *ngIf="orderBy==='cpu'" class="fa fa-lg fa-arrow-down" style="color:lightgreen"></span></th>
+        <th class="th-sm" class="link" (click)="clickMem()">
+          %MEM <span *ngIf="orderBy==='mem'" class="fa fa-lg fa-arrow-down" style="color:lightgreen"></span></th>
+        <th class="th-sm">Actions</th>
+
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let process of processes.processes; let i = index"
+          [ngbTooltip]="tipContent" triggers="manual"
+          #t1="ngbTooltip"
+          (click)="toggleTooltip(t1,process)">
+
+        <ng-template #tipContent>
+          <h4>
+            Info:
+          </h4>
+          <div *ngIf="process.ports && process.ports.length>0">
+            <h6>Ports:</h6>
+            <div *ngFor="let port of process.ports; let i=index">
+              <p *ngIf="i<6">{{port}}</p>
+            </div>
+            <div *ngIf="process.ports.length > 6">...</div>
+          </div>
+        </ng-template>
+
+        <td>{{process.user ? process.user : "default"}}</td>
+        <td>{{process.pid}}</td>
+        <td>{{process.name}}</td>
+        <td>{{process.path ? process.path : process.command}}</td>
+        <td>{{process.started}}</td>
+        <td>{{process.state}}</td>
+        <td>{{process.pcpu.toFixed(2)}}</td>
+        <td>{{process.pmem.toFixed(2)}}</td>
+        <td class="link">
+          <i title="Kill the process" class="fa fa-power-off" (click)="clickKill(process.pid)"></i>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+

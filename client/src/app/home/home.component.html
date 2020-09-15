@@ -1,0 +1,170 @@
+<ngb-accordion #acc="ngbAccordion" [closeOthers]="true">
+
+  <ngb-panel id="general_info" title="General Information">
+    <ng-template ngbPanelContent>
+
+      <div *ngIf="systemInfo && systemInfoDynamic">
+
+        <app-host-info [data]="systemInfo"></app-host-info>
+
+        <hr>
+
+        <div class="row" style="margin: auto;">
+
+          <div class="col">
+            <h4 class="text-center">Cpu:</h4>
+            <div class="row">
+              <div class="col">
+                <app-progress-bar [errorTreshold]="90" [warningTreshold]="50"
+                                  [value]="systemInfoDynamic.cpu.percent"></app-progress-bar>
+              </div>
+            </div>
+            <div>
+              <div>
+                <span><b>{{systemInfo.cpuInfo}}</b></span>
+              </div>
+              <div *ngIf="systemInfoDynamic.cpu.currentSpeed">
+                <span><b>Current speed:</b>{{systemInfoDynamic.cpu.currentSpeed}}</span>
+              </div>
+              <div *ngIf="systemInfoDynamic.cpu.temperature && systemInfoDynamic.cpu.temperature !== -1">
+                <span><b>Temperature:</b>{{systemInfoDynamic.cpu.temperature}}</span>
+              </div>
+            </div>
+            <div>
+              <canvas class="graphsize"
+                      baseChart
+                      [options]="chartOptions"
+                      [chartType]="'line'"
+                      [labels]="chartCpuData.labels"
+                      [datasets]="chartCpuData.datasets"
+                      [legend]="true"
+              ></canvas>
+            </div>
+          </div>
+
+          <div class="col">
+            <h4 class="text-center">Mem:</h4>
+            <div class="row">
+              <div class="col">
+                <app-progress-bar [errorTreshold]="90" [warningTreshold]="50"
+                                  [value]="systemInfoDynamic.mem.percent"></app-progress-bar>
+              </div>
+            </div>
+            <div>
+              <span><b>{{systemInfo.totalMem}}</b> GB total - </span>
+              <span><b>{{systemInfoDynamic.mem.free}}</b> GB free</span>
+              <span style="float:right"><b>{{systemInfoDynamic.mem.percent}}</b> % occupied</span>
+            </div>
+            <div>
+              <canvas class="graphsize"
+                      baseChart
+                      [options]="chartOptions"
+                      [chartType]="'line'"
+                      [labels]="chartMemData.labels"
+                      [datasets]="chartMemData.datasets"
+                      [legend]="true"
+              ></canvas>
+            </div>
+          </div>
+
+          <div class="col">
+            <h4 class="text-center">Disk:</h4>
+            <div class="row">
+              <div class="col ">
+                <app-progress-bar [errorTreshold]="90" [warningTreshold]="50"
+                                  [value]="systemInfoDynamic.disk.percent"></app-progress-bar>
+              </div>
+            </div>
+            <div>
+              <b>{{systemInfo.totalDisk}}</b> total space
+              <b>{{systemInfoDynamic.disk.free}}</b> free space
+              <b>{{systemInfoDynamic.disk.percent}}</b> used space
+            </div>
+            <div>
+              <canvas class="graphsize"
+                      baseChart
+                      [options]="chartHddOptions"
+                      [chartType]="'doughnut'"
+                      [labels]="chartHddData.labels"
+                      [datasets]="chartHddData.datasets"
+                      [legend]="true"
+              ></canvas>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </ng-template>
+  </ngb-panel>
+
+  <ngb-panel id="processes" title="Process List">
+    <ng-template ngbPanelContent>
+
+      <app-processlist></app-processlist>
+
+    </ng-template>
+  </ngb-panel>
+
+  <ngb-panel id="host_location" title="Host Location">
+    <ng-template ngbPanelContent>
+
+      <div *ngIf="systemInfo.geoHostInfo">
+        <div class="row" style="margin: auto; max-width: 400px;">
+          <h5>IP: "<i>{{systemInfo.geoHostInfo.currentIp}}</i>" provider is located at
+            "<i>{{systemInfo.geoHostInfo.city}}</i>"
+          </h5>
+        </div>
+        <app-gmap [lat]="systemInfo.geoHostInfo.ll[0]" [long]="systemInfo.geoHostInfo.ll[1]"></app-gmap>
+      </div>
+
+    </ng-template>
+  </ngb-panel>
+
+  <ngb-panel id="ping_google_stats" title="Network Test">
+    <ng-template ngbPanelContent>
+
+      <div *ngIf="systemInfo.lastNetworkStat">
+
+        <div class="row" style="margin: auto; max-width: 400px;">
+          <h4>Ping Stats for host: <i>google.it</i></h4>
+          <h5>Taken in date: {{systemInfo.lastNetworkStat.executedAt| date:'medium'}}</h5>
+          <br>
+        </div>
+
+        <hr>
+
+        <div *ngIf="systemInfo.lastNetworkStat.status === 'OK'" class="row"
+             style="margin:auto">
+          <div class="col-md-4">
+            <h4 class="text-center">Maximum:</h4>
+            <ul style="display: table; margin: 0 auto;">
+              <li><b>{{systemInfo.lastNetworkStat.max}} milliseconds</b></li>
+            </ul>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="text-center">Minimum:</h4>
+            <ul style="display: table; margin: 0 auto;">
+              <li><b>{{systemInfo.lastNetworkStat.min}} milliseconds</b></li>
+            </ul>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="text-center">Average:</h4>
+            <ul style="display: table; margin: 0 auto;">
+              <li><b>{{systemInfo.lastNetworkStat.avg}} milliseconds</b></li>
+            </ul>
+          </div>
+        </div>
+
+        <div *ngIf="!systemInfo.lastNetworkStat || systemInfo.lastNetworkStat.status !== 'OK'">
+          Error: host unreachable
+        </div>
+
+      </div>
+
+    </ng-template>
+  </ngb-panel>
+
+</ngb-accordion>

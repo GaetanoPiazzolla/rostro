@@ -1,0 +1,14 @@
+<div class="progress" >
+  <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar"
+       [ngClass]="backgroundColor"
+       [ngStyle]="{'width':value+'%'}"
+       [attr.aria-valuenow]="value"
+       aria-valuemin="0"
+       aria-valuemax="100">
+    {{value}} %
+  </div>
+</div>
+
+<!--<div class="progress" style="height: 20px;">-->
+<!--  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--</div>-->

@@ -1,0 +1,44 @@
+<div class="row" style="margin: auto;">
+
+  <div class="col">
+    <ul>
+      <li><b>Uptime:</b> {{data.uptime}} hour(s)</li>
+      <li><b>Host name:</b> {{data.hostName}}</li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <ul>
+      <li><b>Home dir:</b> {{data.homeDir}}</li>
+      <li *ngIf="data.osInfo"><b>Distro:</b> {{data.osInfo.distro}}</li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <ul *ngIf="data.osInfo">
+      <li><b>Platform:</b> {{data.osInfo.platform}}</li>
+      <li><b>Release:</b> {{data.osInfo.release}}</li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <ul *ngIf="data.osInfo">
+      <li><b>Kernel:</b> {{data.osInfo.kernel}}</li>
+      <li><b>Arch:</b> {{data.osInfo.arch}}</li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <ul *ngIf="data.osInfo">
+      <li><b>Serial:</b> {{data.osInfo.serial}}</li>
+      <li><b>Build:</b> {{data.osInfo.build}}</li>
+    </ul>
+  </div>
+
+  <div class="col">
+    <ul *ngIf="data.osInfo">
+      <li ><b>ServicePack:</b> {{data.osInfo.servicepack}}</li>
+    </ul>
+  </div>
+
+</div>
