@@ -1,19 +1,49 @@
 <div class="container">
-  <div class="row justify-content-center align-items-center" style="height:100vh">
+
+  <div class="row justify-content-center">
+
     <div class="col-4">
-      <div class="card">
-        <div class="card-body">
-          <form action="" autocomplete="off">
-            <div class="form-group">
-              <input type="text" class="form-control" name="username" [(ngModel)]="username">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" name="password" [(ngModel)]="password">
-            </div>
-            <button type="button" id="sendlogin" (click)="login()" class="btn btn-primary">LogIn</button>
-          </form>
+
+      <div style="text-align: center">
+        <div>
+          <img class="floatBoat" src="assets/images/barca.png" style="width: 100%"/>
+          <img class="weaves" src="assets/images/onde.png" style="width: 100%"/>
         </div>
       </div>
+
+      <form action="" class="mt-lg-big mt-md-big mt-sm-big " autocomplete="off">
+
+        <div class="row">
+          <div class="form-group input-group">
+            <div class="input-group-prepend mr-2">
+              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+              </svg>
+            </div>
+            <input type="text" class="form-control" name="username" placeholder="Enter your username" [(ngModel)]="username">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group input-group">
+            <div class="input-group-prepend mr-2">
+              <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-key" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+              </svg>
+            </div>
+            <input type="password" class="form-control" name="password" placeholder="Enter your password" [(ngModel)]="password">
+          </div>
+        </div>
+
+        <div class="row float-right mt-2">
+          <button type="button" class="rostroButton float-right" id="sendlogin" (click)="login()">Let me check
+          </button>
+        </div>
+
+      </form>
+
     </div>
+
   </div>
 </div>

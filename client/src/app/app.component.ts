@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit, Renderer2} from '@angular/core';
 import {environment} from '../environments/environment';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,8 @@ import {environment} from '../environments/environment';
 
 export class AppComponent implements OnInit, AfterViewInit {
 
-  public title = 'Rostro - Remote hOST contROller';
-
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private authService: AuthService) {
+  }
 
   ngOnInit() {
     const script = this.renderer.createElement('script');
@@ -19,6 +19,16 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.renderer.appendChild(document.head, script);
   }
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {
+
+  }
+
+  logOut(): void {
+    this.authService.logOut();
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
 
 }

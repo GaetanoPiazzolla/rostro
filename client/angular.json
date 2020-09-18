@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tano-pi": {
+    "rostro": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -61,24 +61,32 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tano-pi:build"
+            "browserTarget": "rostro:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "tano-pi:build:production"
+            "local": {
+              "browserTarget": "rostro:build:local"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tano-pi:build"
+            "browserTarget": "rostro:build"
           }
         },
         "lint": {
@@ -94,35 +102,7 @@
           }
         }
       }
-    },
-    "tano-pi-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "tano-pi:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "tano-pi:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
     }
   },
-  "defaultProject": "tano-pi"
+  "defaultProject": "rostro"
 }

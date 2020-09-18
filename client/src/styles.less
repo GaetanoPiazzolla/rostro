@@ -1,19 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
-body {
-  color: white;
+@import "./variables.less";
+
+.secondaryColor {
+  color: @secondary-color !important;
 }
 
-.card {
-  background-color: transparent !important;
+.primaryColor {
+  color: @primary-color !important;
+}
+
+.titleGreen {
+  color: @primary-color !important;
+  text-shadow: 1px 1px @secondary-color;
+}
+
+.titleWhite {
+  color: @secondary-color !important;
+  text-shadow: 1px 1px @primary-color;
+}
+
+body {
+  color: @secondary-color;
+  background-color: @background-color;
+  font-family: 'Dosis', sans-serif;
 }
 
 a, button {
-  color: #45c222 !important;
+  color: @primary-color !important;
 }
 
 .link {
-  color: coral !important;
+  color: @primary-color !important;
   text-decoration: underline !important;
   cursor: pointer !important;
 }
@@ -21,8 +39,46 @@ a, button {
 .tooltip-inner {
   max-width: 500px;
   text-align: justify;
+
   p {
     margin-bottom: 0px;
-    font-size:15px;
+    font-size: 15px;
   }
 }
+
+*:focus {
+  outline: 0 !important;
+}
+
+
+input:focus {
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 1) !important;
+  -moz-box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 1)!important;;
+  box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 1)!important;
+  border: @secondary-color 2px solid !important;
+}
+
+// homepage
+
+.card {
+  background-color: transparent !important;
+}
+
+.graphsize {
+  height: 40px;
+  width: 80px;
+}
+
+.accordion .card {
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 1);
+  box-shadow: 0px 5px 14px -5px rgba(255, 255, 255, 1);
+}
+
+.card-header {
+  text-align: center;
+}
+
+
+
+

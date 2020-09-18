@@ -1,6 +1,6 @@
 <ngb-accordion #acc="ngbAccordion" [closeOthers]="true">
 
-  <ngb-panel id="general_info" title="General Information">
+  <ngb-panel class="cardShadow" id="general_info" title="General Information">
     <ng-template ngbPanelContent>
 
       <div *ngIf="systemInfo && systemInfoDynamic">
@@ -98,7 +98,7 @@
     </ng-template>
   </ngb-panel>
 
-  <ngb-panel id="processes" title="Process List">
+  <ngb-panel class="cardShadow" id="processes" title="Process List">
     <ng-template ngbPanelContent>
 
       <app-processlist></app-processlist>
@@ -106,7 +106,7 @@
     </ng-template>
   </ngb-panel>
 
-  <ngb-panel id="host_location" title="Host Location">
+  <ngb-panel class="cardShadow" id="host_location" title="Host Location">
     <ng-template ngbPanelContent>
 
       <div *ngIf="systemInfo.geoHostInfo">
@@ -121,7 +121,7 @@
     </ng-template>
   </ngb-panel>
 
-  <ngb-panel id="ping_google_stats" title="Network Test">
+  <ngb-panel class="cardShadow" id="ping_google_stats" title="Network Test">
     <ng-template ngbPanelContent>
 
       <div *ngIf="systemInfo.lastNetworkStat">
