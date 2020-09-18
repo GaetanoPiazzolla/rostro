@@ -1,6 +1,8 @@
 
 # Rostro - Remote hOST contROller
 
+<img src="./images/boat-gif.gif" align="right" width="300">
+
 Simple cross-platform Host monitoring web tool written in Angular and Node.js.
 
 Yep it's a remote web based task manager! What does it do ?
