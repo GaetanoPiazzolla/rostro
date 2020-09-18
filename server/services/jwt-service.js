@@ -1,4 +1,8 @@
 const jwtSecret = require('../config/config').getConf('jwtSecret');
+
+const username = require('../config/config').getConf('username');
+const password = require('../config/config').getConf('password');
+
 let jwt = require('jsonwebtoken');
 
 const checkToken = (req, res, next) => {
