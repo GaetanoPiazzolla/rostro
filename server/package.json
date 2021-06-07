@@ -13,9 +13,9 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongodb": "^3.3.3",
-    "mongoose": "~4.4",
+    "mongoose": "^5.12.13",
     "public-ip": "^3.2.0",
-    "socket.io": "^2.3.0",
-    "systeminformation": "^4.14.17"
+    "socket.io": "^2.4.1",
+    "systeminformation": "^5.7.4"
   }
 }

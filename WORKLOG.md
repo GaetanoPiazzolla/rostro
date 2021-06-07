@@ -105,7 +105,7 @@ Chart js now correctly displays a doughnut for HDD free / used information.
 Step 15) TANOPI Becoming a PWA
 --
 - I have installed an nginx server on host, with self signed certificates ( cert-bot on PI ) serving on port 80 and 443.
-- Configured a domain (gaetano.anteastrani.it) to serve on private ip (93.58.74.222)
+- Configured a domain (192.168.1.9) to serve on private ip (93.58.74.222)
 - Configured gateway on router to PI host on demilitarized zone
 - Installed angular PWA using ng add @angular/pwa
 - Upgraded modules version
@@ -208,3 +208,41 @@ Step 36)  JWT shit
 - added token-interceptor for all requests
 - added redirect to login page if any 401 error code gets returned from server
 - added cors handling on server
+
+Step 37) Enabling private VPN, watering plants 
+--
+
+1) abilitare ssh 
+
+2) connettersi in ssh tramite: raspberry /pi 
+
+3) sudo apt-get update
+   sudo apt-get full-upgrade
+   
+4) curl -L https://install.pivpn.io | bash
+
+5) sudo pivpn add
+
+6) installare 
+--- GIT, 
+sudo apt install git
+
+--- NPM,NODE
+sudo apt install nodejs
+
+--- MONGODB, 
+sudo apt install mongodb
+sudo systemctl enable mongodb
+
+--- NGINX
+sudo apt install nginx
+sudo /etc/init.d/nginx start
+
+--- make
+sudo apt-get install build-essential
+
+--- uhubctl
+sudo apt-get install libusb-1.0-0-dev
+git clone https://github.com/mvp/uhubctl
+cd uhubctl/
+sudo make install 

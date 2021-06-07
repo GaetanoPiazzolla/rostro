@@ -14,6 +14,7 @@ const cpuService = require('./services/cpu-service');
 const ramService = require('./services/ram-service');
 const processService = require('./services/process-service');
 const jwtService = require('./services/jwt-service');
+const wateringService = require('./services/watering-service');
 
 // CONFIGURE HTTP server ---------------
 const app = express();
@@ -78,6 +79,19 @@ router.post('/process/kill/', jwtService.checkToken, function (req, res) {
     console.log(data);
     res.status(500).json({msg: data});
   })
+});
+
+router.post('/watering-start', jwtService.checkToken, function (req, res) {
+
+  wateringService.startWatering(function (succ, err) {
+    if (succ) {
+      res.status(200).json({});
+    }
+    if (err) {
+      res.status(500).json({})
+    }
+  })
+
 });
 
 //  START THE SERVER  ----------------
