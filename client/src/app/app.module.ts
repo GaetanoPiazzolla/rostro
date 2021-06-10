@@ -20,6 +20,7 @@ import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from '../interceptor/token-interceptor';
 import {AuthService} from '../services/auth.service';
+import {WateringSerivce} from '../services/watering.service'
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import {AuthService} from '../services/auth.service';
     FormsModule
   ],
   providers: [
-    SystemInfoService, SocketService, AuthService,
+    SystemInfoService, SocketService, AuthService, WateringSerivce,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

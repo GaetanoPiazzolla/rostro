@@ -1,9 +1,9 @@
-const os = require('os');
-const exec = require('child_process').exec;
+
+var shell = require('shelljs');
 
 function startWatering(callback) {
 
-  exec("uhubctl -l 1-1 -p 2 -a 1", function (error, stdout, stderr) {
+  shell.exec("cd && ./rostro/start-watering.sh", function (error, stdout, stderr) {
     if (error) {
       console.error(stderr);
     } else {
@@ -14,13 +14,13 @@ function startWatering(callback) {
 
 }
 
-function endWatering(callback) {
+function stopWatering(callback) {
 
-  exec("uhubctl -l 1-1 -p 2 -a 0", function (error, stdout, stderr) {
+  shell.exec("cd && ./rostro/stop-watering.sh", function (error, stdout, stderr) {
     if (error) {
       console.error(stderr);
     } else {
-      console.log('watering started');
+      console.log('watering stopped');
       callback && callback();
     }
   });
@@ -29,5 +29,5 @@ function endWatering(callback) {
 
 module.exports = {
   startWatering: startWatering,
-  endWatering: endWatering
+  stopWatering: stopWatering
 };

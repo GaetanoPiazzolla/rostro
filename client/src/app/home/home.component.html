@@ -167,4 +167,24 @@
     </ng-template>
   </ngb-panel>
 
+  <ngb-panel class="cardShadow" id="watering" title="Watering Plants">
+    <ng-template ngbPanelContent>
+
+      <div *ngIf="systemInfo.wateringInfo">
+
+        <div class="row" style="margin: auto; max-width: 400px;">
+          <h5>Last watered in date: {{systemInfo.wateringInfo.lastExecutedAt| date:'medium'}}</h5>
+          <br>
+          <h5>Last watered for: {{systemInfo.wateringInfo.lastDurationSeconds}} seconds</h5>
+        </div>
+
+        <hr>
+
+        <button class="btn-primary" (click)="startWatering()">Start Watering</button>
+
+      </div>
+
+    </ng-template>
+  </ngb-panel>
+
 </ngb-accordion>

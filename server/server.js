@@ -45,7 +45,9 @@ router.get('/system-info', jwtService.checkToken, function (req, res) {
     uptime: hostInfo.uptime, // HOURS
     hostName: hostInfo.hostName,
     homeDir: hostInfo.homeDir,
-    osInfo: hostInfo.osInfo
+    osInfo: hostInfo.osInfo,
+
+    wateringInfo: wateringInfo
   });
 
 });
@@ -81,14 +83,26 @@ router.post('/process/kill/', jwtService.checkToken, function (req, res) {
   })
 });
 
-router.post('/watering-start', jwtService.checkToken, function (req, res) {
+let wateringInfo = {
+  lastExecutedAt: new Date().getTime(),
+  lastDurationSeconds: 5
+}
+router.get('/watering', jwtService.checkToken, function (req, res) {
 
   wateringService.startWatering(function (succ, err) {
-    if (succ) {
-      res.status(200).json({});
-    }
     if (err) {
-      res.status(500).json({})
+      res.status(500).json({err: err})
+    } else {
+      setTimeout(function () {
+        wateringService.stopWatering(function (succ, err) {
+          if (err) {
+            res.status(500).json({err: err})
+            wateringInfo.lastExecutedAt = new Date().getTime();
+          } else {
+            res.status(200).json({})
+          }
+        })
+      }, 5000)
     }
   })
 

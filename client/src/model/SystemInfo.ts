@@ -1,3 +1,5 @@
+import {WateringInfo} from './WateringInfo';
+
 export class SystemInfo {
   percentMemArray: Array<number>; // used ram
   percentCpuArray: Array<number>; // used cpu
@@ -10,4 +12,5 @@ export class SystemInfo {
   osInfo: OsInfo;
   homeDir: string;
   hostName: string;
+  wateringInfo: WateringInfo;
 }
