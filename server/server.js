@@ -87,6 +87,7 @@ let wateringInfo = {
   lastExecutedAt: new Date().getTime(),
   lastDurationSeconds: 5
 }
+wateringService.stopWatering();
 router.get('/watering', jwtService.checkToken, function (req, res) {
 
   wateringService.startWatering(function (succ, err) {
@@ -97,8 +98,8 @@ router.get('/watering', jwtService.checkToken, function (req, res) {
         wateringService.stopWatering(function (succ, err) {
           if (err) {
             res.status(500).json({err: err})
-            wateringInfo.lastExecutedAt = new Date().getTime();
           } else {
+            wateringInfo.lastExecutedAt = new Date().getTime();
             res.status(200).json({})
           }
         })
