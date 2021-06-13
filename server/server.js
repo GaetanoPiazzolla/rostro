@@ -103,7 +103,7 @@ router.get('/watering', jwtService.checkToken, function (req, res) {
             res.status(500).json({err: err})
           } else {
             wateringInfo.lastExecutedAt = new Date().getTime();
-            wateringService.saveWateringInfo("date: "+ new Date().toDateString() + " - duration: " + wateringDurationSeconds)
+            wateringService.saveWateringInfo("date: "+ new Date().toString() + " - duration: " + wateringDurationSeconds)
             res.status(200).json({})
           }
         })
