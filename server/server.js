@@ -26,6 +26,9 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 const router = express.Router({});
 
+const config = require('../config/config');
+const wateringDurationSeconds = config.getConf('wateringDurationSeconds');
+
 app.use('/api', router);
 
 router.post('/login', jwtService.login);
@@ -85,7 +88,7 @@ router.post('/process/kill/', jwtService.checkToken, function (req, res) {
 
 let wateringInfo = {
   lastExecutedAt: new Date().getTime(),
-  lastDurationSeconds: 5
+  lastDurationSeconds: wateringDurationSeconds
 }
 wateringService.stopWatering();
 router.get('/watering', jwtService.checkToken, function (req, res) {
@@ -100,10 +103,11 @@ router.get('/watering', jwtService.checkToken, function (req, res) {
             res.status(500).json({err: err})
           } else {
             wateringInfo.lastExecutedAt = new Date().getTime();
+            wateringService.saveWateringInfo("date: "+ new Date().toDateString() + " - duration: " + wateringDurationSeconds)
             res.status(200).json({})
           }
         })
-      }, 5000)
+      }, wateringDurationSeconds * 1000)
     }
   })
 

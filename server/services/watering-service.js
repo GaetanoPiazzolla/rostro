@@ -1,5 +1,6 @@
 
 var shell = require('shelljs');
+var fs = require('fs');
 
 function startWatering(callback) {
 
@@ -27,7 +28,16 @@ function stopWatering(callback) {
 
 }
 
+function saveWateringInfo(info) {
+
+  fs.writeFile('/home/pi/watering-data.log', info, { flag: 'wx' }, function (err) {
+    if (err) throw err;
+    console.log("It's saved!");
+  });
+}
+
 module.exports = {
   startWatering: startWatering,
-  stopWatering: stopWatering
+  stopWatering: stopWatering,
+  saveWateringInfo: saveWateringInfo
 };
