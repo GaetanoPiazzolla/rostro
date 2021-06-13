@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 const router = express.Router({});
 
-const config = require('../config/config');
+const config = require('./config/config');
 const wateringDurationSeconds = config.getConf('wateringDurationSeconds');
 
 app.use('/api', router);
