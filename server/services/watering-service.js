@@ -1,4 +1,3 @@
-
 var shell = require('shelljs');
 var fs = require('fs');
 
@@ -30,7 +29,7 @@ function stopWatering(callback) {
 
 function saveWateringInfo(info) {
 
-  fs.writeFile('/home/pi/watering-data.log', info, { flag: 'wx' }, function (err) {
+  fs.writeFile('/home/pi/watering-data.log', info + ' /n', {flag: 'ax'}, function (err) {
     if (err) throw err;
     console.log("It's saved!");
   });
