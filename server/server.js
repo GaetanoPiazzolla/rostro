@@ -26,9 +26,6 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 const router = express.Router({});
 
-const config = require('./config/config');
-const wateringDurationSeconds = config.getConf('wateringDurationSeconds');
-
 app.use('/api', router);
 
 router.post('/login', jwtService.login);
@@ -86,31 +83,19 @@ router.post('/process/kill/', jwtService.checkToken, function (req, res) {
   })
 });
 
+// WATERING
 let wateringInfo = {
   lastExecutedAt: new Date().getTime(),
-  lastDurationSeconds: wateringDurationSeconds
+  lastDurationSeconds: 3
 }
 wateringService.stopWatering();
 router.get('/watering', jwtService.checkToken, function (req, res) {
-
-  wateringService.startWatering(function (succ, err) {
-    if (err) {
-      res.status(500).json({err: err})
-    } else {
-      setTimeout(function () {
-        wateringService.stopWatering(function (succ, err) {
-          if (err) {
-            res.status(500).json({err: err})
-          } else {
-            wateringInfo.lastExecutedAt = new Date().getTime();
-            wateringService.saveWateringInfo("date: "+ new Date().toString() + " - duration: " + wateringDurationSeconds)
-            res.status(200).json({})
-          }
-        })
-      }, wateringDurationSeconds * 1000)
-    }
+  wateringService.startWatering().then( (data) => {
+    wateringInfo = data;
+    res.status(200).json({})
+  }).error( () => {
+    res.status(500).json({err: err})
   })
-
 });
 
 //  START THE SERVER  ----------------
@@ -119,7 +104,7 @@ app.listen(port);
 socketIoService.listen(app, 3001);
 
 // MONGODB --------------------------
-dbInfoService.start(30000);
+// dbInfoService.start(30000);
 
 // MEMORY ARRAY ----------------------
 let percentMemArray = [];
