@@ -89,11 +89,11 @@ let wateringInfo = {
   lastDurationSeconds: 3
 }
 wateringService.stopWatering();
-router.get('/watering', jwtService.checkToken, function (req, res) {
-  wateringService.startWatering().then( (data) => {
+router.get('/watering', function (req, res) {
+  wateringService.startWatering().then((data) => {
     wateringInfo = data;
-    res.status(200).json({})
-  }).error( () => {
+    res.status(200).json({wateringInfo})
+  }, (err) => {
     res.status(500).json({err: err})
   })
 });

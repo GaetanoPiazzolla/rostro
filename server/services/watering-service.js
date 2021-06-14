@@ -4,13 +4,31 @@ const config = require('../config/config');
 
 const wateringDurationSeconds = config.getConf('wateringDurationSeconds');
 
+function getScriptStart() {
+  if (process.platform === 'linux') {
+    return "cd && ./rostro/start-watering.sh"
+  } else {
+    return "cd"
+  }
+}
+
+function getScriptStop() {
+
+  if (process.platform === 'linux') {
+    return "cd && ./rostro/stop-watering.sh"
+  } else {
+    return "cd"
+  }
+}
+
 function startWatering() {
 
   return new Promise((resolve, reject) => {
-    shell.exec("cd && ./rostro/start-watering.sh", function (error, stdout, stderr) {
 
+    shell.exec(getScriptStart(), function (error, stdout, stderr) {
       if (error) {
         console.error('error watering', stderr);
+        stopWatering()
         reject(stderr);
       } else {
         console.log('watering started');
@@ -26,20 +44,22 @@ function startWatering() {
                 lastExecutedAt: new Date().getTime(),
                 lastDurationSeconds: wateringDurationSeconds
               }
-              this.saveWateringInfo("date: " + new Date().toString() + " - duration: " + wateringDurationSeconds)
+              saveWateringInfo("date: " + new Date().toString() + " - duration: " + wateringDurationSeconds)
               resolve(wateringInfo)
             }
           })
         }, wateringDurationSeconds * 1000)
       }
     });
+
   })
+
 
 }
 
 function stopWatering(callback) {
 
-  shell.exec("cd && ./rostro/stop-watering.sh", function (error, stdout, stderr) {
+  shell.exec(getScriptStop(), function (error, stdout, stderr) {
     if (error) {
       console.error(stderr);
     } else {
@@ -57,8 +77,6 @@ function saveWateringInfo(info) {
   });
 
 }
-
-saveWateringInfo('caccona')
 
 module.exports = {
   startWatering: startWatering,
