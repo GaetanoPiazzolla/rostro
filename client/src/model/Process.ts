@@ -6,7 +6,7 @@ class Process {
   started: string;
   state: string;
   command: string;
-  pcpu: number;
-  pmem: number;
+  cpu: number;
+  mem: number;
   ports: string[];
 }

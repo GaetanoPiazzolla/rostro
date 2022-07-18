@@ -8,7 +8,7 @@ const geoIp = require('geoip-lite');
 // SERVICES ---------------------------
 const pingService = require('./services/ping-service');
 const socketIoService = require('./services/socket-io-service');
-const dbInfoService = require('./services/database-info-service');
+// const dbInfoService = require('./services/database-info-service');
 const hostBasicService = require('./services/host-basic-service');
 const cpuService = require('./services/cpu-service');
 const ramService = require('./services/ram-service');

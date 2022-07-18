@@ -79,8 +79,8 @@
         <td>{{process.path ? process.path : process.command}}</td>
         <td>{{process.started}}</td>
         <td>{{process.state}}</td>
-        <td>{{process.pcpu.toFixed(2)}}</td>
-        <td>{{process.pmem.toFixed(2)}}</td>
+        <td>{{process.cpu.toFixed(2)}}</td>
+        <td>{{process.mem.toFixed(2)}}</td>
         <td class="link">
           <i title="Kill the process" class="fa fa-power-off" (click)="clickKill(process.pid)"></i>
         </td>

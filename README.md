@@ -45,7 +45,7 @@ TODO:
 2) prod: pm2 start server.js ( pm2 is a great tool! )
 
 * CLIENT
-1) dev: cd client && npm install && ng serve
+1) dev: cd client && npm install && npm install -g @angular/cli && ng serve
 2) prod: ng build --prod; and serve directory in your favorite web server
 
 

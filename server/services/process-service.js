@@ -4,7 +4,7 @@ const exec = require('child_process').exec;
 
 function getProcessPort() {
   return new Promise((resolve, reject) => {
-    exec('netstat -ano', function (error, stdout, stderr) {
+    exec('netstat -an', function (error, stdout, stderr) {
       if (error) {
         console.error(stderr);
         reject(stderr);
@@ -35,9 +35,9 @@ const getProcessesAsync = async function (number = 5, orderBy = 'cpu', searchTex
   let orderedProcesses = processes.list.sort(
     function (a, b) {
       if (orderBy === 'cpu') {
-        return b.pcpu - a.pcpu;
+        return b.cpu - a.cpu;
       } else if (orderBy === 'mem') {
-        return b.pmem - a.pmem;
+        return b.mem - a.mem;
       }
     });
 
