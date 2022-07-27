@@ -4,5 +4,8 @@
   "jwtSecret": "worldisfullofdevelopers",
   "username" : "admin",
   "password" : "password",
-  "wateringDurationSeconds" : 5
+  "wateringDurationSeconds" : 5,
+  "rele_water_number" : "1",
+  "rele_air_number" : "2",
+  "rele_light_number" : "3"
 }

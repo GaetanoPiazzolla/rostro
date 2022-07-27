@@ -14,7 +14,7 @@ const cpuService = require('./services/cpu-service');
 const ramService = require('./services/ram-service');
 const processService = require('./services/process-service');
 const jwtService = require('./services/jwt-service');
-const wateringService = require('./services/watering-service');
+const releService = require('./services/rele-service');
 
 // CONFIGURE HTTP server ---------------
 const app = express();
@@ -46,8 +46,6 @@ router.get('/system-info', jwtService.checkToken, function (req, res) {
     hostName: hostInfo.hostName,
     homeDir: hostInfo.homeDir,
     osInfo: hostInfo.osInfo,
-
-    wateringInfo: wateringInfo
   });
 
 });
@@ -83,16 +81,60 @@ router.post('/process/kill/', jwtService.checkToken, function (req, res) {
   })
 });
 
-// WATERING
+// WATER
 let wateringInfo = {
   lastExecutedAt: new Date().getTime(),
   lastDurationSeconds: 3
 }
-wateringService.stopWatering();
-router.get('/watering', function (req, res) {
-  wateringService.startWatering().then((data) => {
+router.get('/water/give', function (req, res) {
+  releService.giveWater().then((data) => {
     wateringInfo = data;
     res.status(200).json({wateringInfo})
+  }, (err) => {
+    res.status(500).json({err: err})
+  })
+});
+router.get('/water/info', function (req, res) {
+    res.status(200).json(wateringInfo)
+});
+router.get('/air/info', function (req, res) {
+  releService.getAir().then((data) => {
+    res.status(200).json(data)
+  }, (err) => {
+    res.status(500).json({err: err})
+  })
+});
+router.get('/light/info', function (req, res) {
+  releService.getLight().then((data) => {
+    res.status(200).json(data)
+  }, (err) => {
+    res.status(500).json({err: err})
+  })
+});
+router.get('/air/start', function (req, res) {
+  releService.startAir().then((data) => {
+    res.status(200).json({data})
+  }, (err) => {
+    res.status(500).json({err: err})
+  })
+});
+router.get('/air/stop', function (req, res) {
+  releService.stopAir().then((data) => {
+    res.status(200).json({data})
+  }, (err) => {
+    res.status(500).json({err: err})
+  })
+});
+router.get('/light/start', function (req, res) {
+  releService.startLight().then((data) => {
+    res.status(200).json({data})
+  }, (err) => {
+    res.status(500).json({err: err})
+  })
+});
+router.get('/light/stop', function (req, res) {
+  releService.stopLight().then((data) => {
+    res.status(200).json({data})
   }, (err) => {
     res.status(500).json({err: err})
   })

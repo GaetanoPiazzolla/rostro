@@ -12,6 +12,7 @@ import {LoginComponent} from './login/login.component';
 import {RouterModule} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {GmapComponent} from './gmap/gmap.component';
+import {GrowBoxComponent} from './grow-box/grow-box.component';
 import {ProgressBarComponent} from './progress-bar/progress-bar.component';
 import {HostInfoComponent} from './host-info/host-info.component';
 import {ProcesslistComponent} from './processlist/processlist.component';
@@ -30,7 +31,8 @@ import {WateringSerivce} from '../services/watering.service'
     GmapComponent,
     ProgressBarComponent,
     HostInfoComponent,
-    ProcesslistComponent
+    ProcesslistComponent,
+    GrowBoxComponent
   ],
   imports: [
     BrowserModule,

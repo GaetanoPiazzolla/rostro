@@ -12,5 +12,4 @@ export class SystemInfo {
   osInfo: OsInfo;
   homeDir: string;
   hostName: string;
-  wateringInfo: WateringInfo;
 }

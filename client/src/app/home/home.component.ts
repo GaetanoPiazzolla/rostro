@@ -4,7 +4,6 @@ import {SystemInfoService} from '../../services/systeminfo.service';
 import {SysDynamic} from '../../model/SysDynamic';
 import {SocketService} from '../../services/socket.service';
 import {environment} from '../../environments/environment';
-import {WateringSerivce} from "../../services/watering.service";
 
 @Component({
   selector: 'app-home',
@@ -30,8 +29,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private chartMaxDimension: number;
 
   constructor(private systemInfoService: SystemInfoService,
-              private socketService: SocketService,
-              private wateringSerivce: WateringSerivce) {
+              private socketService: SocketService) {
     // nothing
   }
 
@@ -103,7 +101,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       data: [],
       label: '% Memory Usage',
       pointBorderWidth: 0.1
-
     }];
     this.chartCpuData.datasets = [{
       data: [],
@@ -116,12 +113,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       data: null
     }];
 
-  }
-
-  startWatering() {
-    this.wateringSerivce.startWatering().subscribe((data) => {
-      console.log(data);
-    });
   }
 
   ngAfterViewInit(): void {

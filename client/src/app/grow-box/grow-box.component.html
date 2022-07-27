@@ -1,0 +1,26 @@
+<div>
+  <h5>Water</h5>
+  <p *ngIf="wateringInfo">Last watered in date: {{wateringInfo.lastExecutedAt| date:'medium'}}</p>
+  <p *ngIf="wateringInfo">Last watered for: {{wateringInfo.lastDurationSeconds}} seconds</p>
+  <button class="btn-primary" (click)="startWatering()">Start Watering</button>
+</div>
+______________________________
+<div>
+  <h5>Air</h5>
+  <p>Status:
+    <button *ngIf="air.status==='ON'" (click)="turnOffAir()" class="btn-primary">ON</button>
+    <button *ngIf="air.status==='OFF'" (click)="turnOnAir()" class="btn-primary">OFF</button>
+  </p>
+  <p>Turn on at:<input type="time" /></p>
+  <p>Turn off at:<input type="time" /></p>
+</div>
+______________________________
+<div>
+  <h5>Light</h5>
+  <p>Status:
+    <button *ngIf="light.status==='ON'" (click)="turnOffLight()" class="btn-primary">ON</button>
+    <button *ngIf="light.status==='OFF'" (click)="turnOnLight()" class="btn-primary">OFF</button>
+  </p>
+  <p>Turn on at:<input type="time" /></p>
+  <p>Turn off at:<input type="time" /></p>
+</div>
